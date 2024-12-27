@@ -1,5 +1,9 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import AuthProvider from "@/Provider/AuthProvider";
+import Navbar from "@/Components/Navbar";
+import {NextUIProvider} from "@nextui-org/react"; 
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,11 +24,18 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+ 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+               <NextUIProvider>
+        <AuthProvider>
+          <Navbar></Navbar>
+         <div> {children}</div>
+        </AuthProvider>
+        </NextUIProvider>
       </body>
+
     </html>
   );
 }
